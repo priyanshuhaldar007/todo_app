@@ -1,12 +1,14 @@
+// Importing files and componensts.
 import React from "react";
 
+// Creating the FilterButton component
 function FilterButton(props) {
     return (
         <button
             type="button"
             className="btn toggle-btn"
             aria-pressed={props.isPressed}
-            onClick={() => props.setFilter(props.name)}
+            onClick={() => props.setFilter(props.name)} //using the set filter function in the parent to update the todo list
         >
             <span className="visually-hidden">Show </span>
             <span>{props.name}</span>

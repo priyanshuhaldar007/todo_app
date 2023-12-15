@@ -1,3 +1,4 @@
+// Importing files and componensts.
 import './assets/styles/main.css';
 import React, { useState, useEffect } from 'react';
 import Form from './components/Form';
@@ -5,10 +6,14 @@ import FilterButton from './components/FilterButton';
 import Todo from './components/Todo';
 import { nanoid } from 'nanoid';
 
+// Creating the App component
 const App = (props) => {
+
+	// Creating two states to store task list and filters
 	const [tasks, setTasks] = useState(props.tasks);
 	const [filter, setFilter] = useState('All');
 
+	// Creating a filter object to map accordingly
 	const FILTER_MAP = {
 		All: () => true,
 		Active: (task) => !task.completed,
@@ -17,6 +22,7 @@ const App = (props) => {
 
 	const FILTER_NAMES = Object.keys(FILTER_MAP);
 
+	// Function to toggle completion of the task
 	function toggleCompleted(id) {
 		const updatedTasks = tasks.map((task) => {
 			if (id === task.id) {
@@ -27,11 +33,13 @@ const App = (props) => {
 		setTasks(updatedTasks);
 	}
 
+	// Function to delete the task
 	function deleteTask(id) {
 		const remainingTasks = tasks.filter((task) => id !== task.id);
 		setTasks(remainingTasks);
 	}
 
+	// Function to edit a task
 	function editTask(id, newName) {
 		const editedTaskList = tasks.map((task) => {
 			if (id === task.id) {
@@ -42,11 +50,13 @@ const App = (props) => {
 		setTasks(editedTaskList);
 	}
 
+	// Function to add a new task
 	function addTask(name) {
 		const newTask = { id: `todo-${nanoid()}`, name, completed: false };
 		setTasks([...tasks, newTask]);
 	}
 
+	// Retrieving all the tasks and filtering it based on the option selected
 	const taskList = tasks
 		.filter(FILTER_MAP[filter])
 		.map((task) => (
@@ -61,6 +71,7 @@ const App = (props) => {
 			/>
 		));
 
+	// Setting the active filter button based on selection
 	const filterList = FILTER_NAMES.map((name) => (
 		<FilterButton
 			key={name}
@@ -70,6 +81,7 @@ const App = (props) => {
 		/>
 	));
 
+	// Rendering based on conditon of filters and qunatity
 	const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
 	const headingNumText = `${taskList.length} ${tasksNoun}`;
 	let headingSubText = 'available';
@@ -85,10 +97,12 @@ const App = (props) => {
 			headingSubText = 'available';
 	}
 
+	// Using use effect to save the data on local storage
 	useEffect(() => {
 		localStorage.setItem('myTaskList', JSON.stringify(tasks));
 	}, [tasks]);
 
+	// Rendering the components
 	return (
 		<div className="todoapp stack-large">
 			<h1>To Do List</h1>

@@ -1,25 +1,31 @@
+// Importing files and componensts.
 import React, { useState } from "react";
 
+// Creating the Todo component
 function Todo(props) {
+	// Creating two states to check for editing and set new name
     const [isEditing, setEditing] = useState(false);
     const [newName, setNewName] = useState("");
 
+    // Function to rename a todo
     function handleChange(e) {
         setNewName(e.target.value);
     }
 
+    // Function to save edited name
     function handleSubmit(e) {
         e.preventDefault();
         props.editTask(props.id, newName);
         setNewName("");
         setEditing(false);
     }
-
+    
+    // Component based on the editing boolean state 
     const editingTemplate = (
         <form className="stack-small" onSubmit={handleSubmit}>
             <div className="form-group">
                 <label className="todo-label" htmlFor={props.id}>
-                    <span>Renaming</span>
+                    <span>Renaming</span>  
                     <span className="todo-label-text">{props.name}</span>
                 </label>
                 <input
@@ -42,12 +48,15 @@ function Todo(props) {
                         renaming {props.name}
                     </span>
                 </button>
-                <button type="submit" className="btn btn__primary todo-edit">
-                    Rename
-                    <span className="visually-hidden">
-                        new name for {props.name}
-                    </span>
-                </button>
+                    <button
+                        type="submit"
+                        className="btn btn__primary todo-edit" 
+                    >
+                        Rename
+                        <span className="visually-hidden">
+                            new name for {props.name}
+                        </span>
+                    </button>
             </div>
         </form>
     );

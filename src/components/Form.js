@@ -1,8 +1,12 @@
+// Importing files and componensts.
 import React, { useState } from "react";
 
+// Creating the Form component
 function Form(props) {
+    // Creating state to set name for adding a todo
     const [name, setName] = useState("");
 
+    // Function to check for empty todo name
     function handleSubmit(e) {
         e.preventDefault();
         if( 0 !== name.length){
@@ -10,6 +14,8 @@ function Form(props) {
             setName("");
         }
     }
+
+    // Function to update state
     function handleChange(e) {
         setName(e.target.value);
     }
