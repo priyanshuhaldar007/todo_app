@@ -19,7 +19,8 @@ function Todo(props) {
         <form className="stack-small" onSubmit={handleSubmit}>
             <div className="form-group">
                 <label className="todo-label" htmlFor={props.id}>
-                    Renaming {props.name}
+                    <span>Renaming</span>
+                    <span className="todo-label-text">{props.name}</span>
                 </label>
                 <input
                     id={props.id}
@@ -41,15 +42,12 @@ function Todo(props) {
                         renaming {props.name}
                     </span>
                 </button>
-                    <button
-                        type="submit"
-                        className="btn btn__primary todo-edit" 
-                    >
-                        Rename
-                        <span className="visually-hidden">
-                            new name for {props.name}
-                        </span>
-                    </button>
+                <button type="submit" className="btn btn__primary todo-edit">
+                    Rename
+                    <span className="visually-hidden">
+                        new name for {props.name}
+                    </span>
+                </button>
             </div>
         </form>
     );

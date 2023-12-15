@@ -342,3 +342,13 @@ body {
         transform: scale(0.8);
 	}
 }
+
+.form-group .todo-label {
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
+}
+
+.form-group .todo-label .todo-label-text{
+	overflow-x: auto;
+}
